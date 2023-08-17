@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     window.onload = function () {
         if (!isAuthenticated()) {
+            alert("No estás logueado, logueate")
             window.location.href = "login.html";
         }
     };
