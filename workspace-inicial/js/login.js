@@ -16,9 +16,6 @@ document.addEventListener("DOMContentLoaded", function(){
         // Almacenar el nombre en sessionStorage para usarlo en home.js
         
         // Redirigir a la página principal
-      
+        
     });
-
-    
-
 });

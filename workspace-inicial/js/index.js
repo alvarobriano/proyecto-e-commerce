@@ -11,4 +11,19 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+
+    window.onload = function () {
+        if (!isAuthenticated()) {
+            window.location.href = "login.html";
+        }
+    };
+    
+    function isAuthenticated() {
+        let nombre = sessionStorage.getItem("username");
+        if (nombre){
+            return true;
+        } else {
+            return false;
+        }
+    }
 });

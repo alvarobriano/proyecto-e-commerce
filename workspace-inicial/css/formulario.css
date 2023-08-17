@@ -77,3 +77,14 @@
     text-align: center;
     padding: 10px;
 }
+
+.checkbox-container {
+    display: flex;
+    align-items: left;
+    margin-left: -280px;
+  }
+
+  #recuerdame {
+    margin-right: -270px;
+    margin-top: 6px;
+  }
