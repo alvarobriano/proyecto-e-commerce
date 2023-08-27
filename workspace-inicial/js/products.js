@@ -1,6 +1,8 @@
 //Necesito precio, nombre, descripción, cantidad vendidos e imagen
 
-const DATA_AUTO_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+//entrega2-parte2 agregamos localStoragegetItem de catID para hacer la url dinámica
+//con una función que ya venía definida setCatID en categories.js linea 38
+const DATA_AUTO_URL = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`; 
 
 async function showProductList(product){
 

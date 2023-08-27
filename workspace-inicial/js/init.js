@@ -42,6 +42,8 @@ let getJSONData = function(url){
     
 }
 
+//función que agrega categoría username en navigation bar, debería agregarlo en todas las páginas
+//solo funciona en index.html
 function agregarCategoriaUsername (nombre_usuario) {
   const username_index = document.getElementById("navbarNav_index");
   const username_cat = document.getElementById("navbarNav_cat");
@@ -58,6 +60,7 @@ function agregarCategoriaUsername (nombre_usuario) {
   return 0;
 }
 
+//si tengo un username ingresado en el login, llamo a la función que me agrega la categoría en la navigation bar
 if (localStorage.getItem("username")) {
   agregarCategoriaUsername(localStorage.getItem("username"));
 };
