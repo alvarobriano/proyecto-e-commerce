@@ -38,4 +38,26 @@ let getJSONData = function(url){
         hideSpinner();
         return result;
     });
+
+    
 }
+
+function agregarCategoriaUsername (nombre_usuario) {
+  const username_index = document.getElementById("navbarNav_index");
+  const username_cat = document.getElementById("navbarNav_cat");
+  const username_sell = document.getElementById("navbarNav_sell");
+  
+  const cat_nombre_usuario = document.createElement('li');
+  
+  cat_nombre_usuario.innerHTML = `${nombre_usuario}`;
+  cat_nombre_usuario.classList.add("nav-nombre");
+
+  username_index.appendChild(cat_nombre_usuario);
+  username_cat.appendChild(cat_nombre_usuario);
+  username_sell.appendChild(cat_nombre_usuario);
+  return 0;
+}
+
+if (localStorage.getItem("username")) {
+  agregarCategoriaUsername(localStorage.getItem("username"));
+};

@@ -188,3 +188,10 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.nav-nombre {
+  display: flex;
+  text-align: center;
+  color:white;
+  padding:7px 0 10px;
+}
