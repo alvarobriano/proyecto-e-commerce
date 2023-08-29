@@ -39,3 +39,18 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+//esta funcion verifica que existe algo en usuario y lo agrega a la navbar (barra de arriba). 
+function usuario () {
+  if (localStorage.getItem("username")) { 
+    const perfil= document.getElementsByClassName("navbar-nav")[0] //buscamos por clases, la clase navbar-nuv estaba en la linea 22 de index.html (el ul). 
+    //el [0] porque aunque el ultimo es solo uno, te crea un array, por lo que tenes que entrar a la poisicion 0 para obtener ese ultimo 
+
+    if (perfil.lastElementChild) { //lastchild basicamente que agarre el ultimo hijo (en este caso li, puede ser p o lo que sea) del "ul"
+      perfil.lastElementChild.classList.add("nav-boton") //esto le agrega la clase que creamos para el usuario, color blanco y demas
+      perfil.lastElementChild.innerHTML = localStorage.getItem("username") //esto agrega a la pagina lo que contenga la variable "username"
+    }
+  }
+}
+
+usuario() 

@@ -1,16 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
-    document.getElementById("autos").addEventListener("click", function() {
-        localStorage.setItem("catID", 101);
-        window.location = "products.html"
-    });
-    document.getElementById("juguetes").addEventListener("click", function() {
-        localStorage.setItem("catID", 102);
-        window.location = "products.html"
-    });
-    document.getElementById("muebles").addEventListener("click", function() {
-        localStorage.setItem("catID", 103);
-        window.location = "products.html"
-    });
+    //Acá borre los 3 getelementbyId porque ya esta en categories.js, linea 38.
+    //en products.js, linea 3, se cambio lo de adentro por ${localStorage.getItem("catID")}
 
     window.onload = function () {
         if (!isAuthenticated()) {
@@ -20,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(){
     };
     
     function isAuthenticated() {
-        let nombre = sessionStorage.getItem("username");
+        let nombre = localStorage.getItem("username");
         if (nombre){
             return true;
         } else {

@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         minCount = undefined;
         maxCount = undefined;
-
+-
         showCategoriesList();
     });
 

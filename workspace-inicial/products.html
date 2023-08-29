@@ -40,6 +40,35 @@
     <div class="text-center p-4">
       <h2>Productos</h2>
       <p class="lead">Verás aquí todas los productos de la categoría que elegiste.</p>
+      <div class="col text-end">
+        <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons"> <!-- Copie esto de CatogoriesHTML (linea 46) para el orden de A-Z y demás y cambié los id -->
+           <input type="radio" class="btn-check" name="options" id="Asc"> <!-- sortAsc -->
+          <label class="btn btn-light" for="sortAsc">A-Z</label>
+          <input type="radio" class="btn-check" name="options" id="Desc">  <!-- sortDesc-->
+          <label class="btn btn-light" for="sortDesc">Z-A</label>
+          <input type="radio" class="btn-check" name="options" id="porValor" checked> <!-- sortByCount-->
+          <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
+        </div>
+      </div>
+      <div class="filtros"> <!-- Copie esto de CatogoriesHTML para los form donde poner el min y el maximo (linea 58). Cambie los id-->
+        <div class="row container p-0 m-0 ">
+          <div class="col">
+          <p class="font-weight-normal text-end my-2">Cant.</p>
+          </div>
+          <div class="col">
+           <input class="form-control" type="number" placeholder="min." id="rangoMin"> <!--rangeFilterCountMin --> 
+          </div>
+          <div class="col">
+          <input class="form-control" type="number" placeholder="máx." id="rangoMax"> <!--rangeFilterCountMax -->
+          </div>
+          <div class="col-3 p-0">
+            <div class="btn-group" role="group">
+            <button class="btn btn-light btn-block" id="rangoCount">Filtrar</button> <!--rangeFilterCount -->
+            <button class="btn btn-link btn-sm" id="clearRango">Limpiar</button> <!-- clearRangeFilter -->
+            </div>
+          </div>
+        </div>
+      </div>   
     </div>  
     <div class="container" id="prod-list-container">    
       <!--<div class="alert alert-danger text-center" role="alert">

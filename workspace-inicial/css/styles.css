@@ -188,3 +188,25 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.nav-boton {            /* Esto es la clase para el nombre de usuario */
+  color: white;
+  display: flex;
+  align-items:center;
+  padding: 5px 0 10px;
+} 
+
+@media (min-width: 768px) { /* Basicamente cuando la pantalla es grande y la lista esta horizontal, */
+  .nav-boton {
+    padding: 0;
+  } 
+}
+
+.nav-boton:hover{ /* Esto cuando al mouse al pasar por el nombre, puede ser poner mano, color, animacion, lo que sea */
+cursor: pointer;
+}
+
+.filtros  {
+  display: flex;
+  align-items: right
+}

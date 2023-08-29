@@ -10,12 +10,10 @@ document.addEventListener("DOMContentLoaded", function(){
       if (nombre.value == "") {
         alert("El usuario no está logueado, por favor rellene los campos");
       } else {
-        sessionStorage.setItem("username", nombre.value);
-        window.location.href = "index.html";
+        // Almacenar el nombre en localStorage para usarlo en home.js
+        localStorage.setItem("username", nombre.value);
+        window.location.href = "index.html";  // Redirigir a la página principal
       };  
-        // Almacenar el nombre en sessionStorage para usarlo en home.js
-        
-        // Redirigir a la página principal
-        
+         
     });
 });
