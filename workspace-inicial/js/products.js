@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sortAndShowProducts(ORDER_BY_PROD_COUNT);
     });
 
-    // cuando se hace
+    // cuando se hace click en filtrar 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
         //de productos por categoría.
@@ -154,6 +154,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("productSearch").addEventListener("input", function() {
         const searchTerm = this.value.trim().toLowerCase();
         filterAndShowProductsBySearch(searchTerm);
+    });
+
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+        document.getElementById("rangeFilterCountMin").value = "";
+        document.getElementById("rangeFilterCountMax").value = "";
+
+        minCount = undefined;
+        maxCount = undefined;
+
+        showProductList(pedirDatos(DATA_AUTO_URL));
     });
 
 });
