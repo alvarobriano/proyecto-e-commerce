@@ -191,7 +191,7 @@ a.custom-card:hover {
 
 .nav-nombre {
   display: flex;
-  text-align: center;
+  align-items: center;
   color:white;
-  padding:7px 0 10px;
+  margin-top: 8px;
 }
