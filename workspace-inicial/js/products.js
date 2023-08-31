@@ -95,6 +95,23 @@ async function filterAndShowProducts(minPrice, maxPrice){
         showProductList(filteredArray);
 };
 
+async function filterAndShowProductsBySearch(searchTerm) {
+    let currentArray = await pedirDatos(DATA_AUTO_URL);
+
+    if (searchTerm !== "") {
+        let filteredArray = currentArray.filter(product => {
+            const productNameLower = product.name.toLowerCase();
+            const descriptionLower = product.description.toLowerCase();
+            return productNameLower.includes(searchTerm) || descriptionLower.includes(searchTerm);
+        });
+
+        showProductList(filteredArray);
+    } else {
+        showProductList(currentArray);
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("sortAsc").addEventListener("click", function(){
@@ -130,6 +147,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         filterAndShowProducts(minCount,maxCount);
+    });
+
+    document.getElementById("productSearch").addEventListener("input", function() {
+        const searchTerm = this.value.trim().toLowerCase();
+        filterAndShowProductsBySearch(searchTerm);
     });
 
 });
