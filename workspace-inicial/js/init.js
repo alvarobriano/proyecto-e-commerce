@@ -40,6 +40,8 @@ let getJSONData = function(url){
     });    
 }
 
+
+//código de la parte 1
 function agregarCategoriaUsername (nombre_usuario) {
   const username = document.getElementsByClassName("navbar-nav")[0];
   username.lastElementChild.innerHTML = `<p class="nav-nombre">${nombre_usuario}</p>`;

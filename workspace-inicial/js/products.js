@@ -6,8 +6,7 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
-//Necesito precio, nombre, descripción, cantidad vendidos e imagen
-
+//parte 2
 const DATA_AUTO_URL = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
 
 async function showProductList(product){
@@ -52,6 +51,7 @@ async function pedirDatos(url) {
 //Muestro los productos
 showProductList(pedirDatos(DATA_AUTO_URL));
 
+//parte 3: funcion que ordena alfabéticamente y cantidad de vendidos
 async function sortAndShowProducts(sortCriteria) {
     let currentArray = await pedirDatos(DATA_AUTO_URL);
     switch (sortCriteria) {
@@ -78,6 +78,7 @@ async function sortAndShowProducts(sortCriteria) {
     showProductList(currentArray);
 }
 
+// funcion que filtra según precio que se requiera
 async function filterAndShowProducts(minPrice, maxPrice){
         let currentArray = await pedirDatos(DATA_AUTO_URL);
     
@@ -95,8 +96,25 @@ async function filterAndShowProducts(minPrice, maxPrice){
         showProductList(filteredArray);
 };
 
+async function filterAndShowProductsBySearch(searchTerm) {
+    let currentArray = await pedirDatos(DATA_AUTO_URL);
+
+    if (searchTerm !== "") {
+        let filteredArray = currentArray.filter(product => {
+            const productNameLower = product.name.toLowerCase();
+            const descriptionLower = product.description.toLowerCase();
+            return productNameLower.includes(searchTerm) || descriptionLower.includes(searchTerm);
+        });
+
+        showProductList(filteredArray);
+    } else {
+        showProductList(currentArray);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
+    //parte 3: cuando se hace click llama a sortAndShowProducts para ordenar alfabéticamente   
     document.getElementById("sortAsc").addEventListener("click", function(){
         sortAndShowProducts(ORDER_ASC_BY_NAME);
     });
@@ -109,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sortAndShowProducts(ORDER_BY_PROD_COUNT);
     });
 
+    // cuando se hace
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
         //de productos por categoría.
@@ -130,6 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         filterAndShowProducts(minCount,maxCount);
+    });
+
+    document.getElementById("productSearch").addEventListener("input", function() {
+        const searchTerm = this.value.trim().toLowerCase();
+        filterAndShowProductsBySearch(searchTerm);
     });
 
 });
