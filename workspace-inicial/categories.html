@@ -20,17 +20,18 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
+        <ul class="navbar-nav w-100 justify-content-between" id="navbarNav_cat">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="categories.html">Categorías</a>
+            <a class="nav-link" href="categories.html">Categorías</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          </li>
+            <li class="nav-item">
           </li>
         </ul>
       </div>
@@ -42,6 +43,7 @@
       <p class="lead">Verás aquí todas las categorías del sitio.</p>
     </div>
     <div class="container">
+      
       <div class="row">
         <div class="col text-end">
           <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
@@ -62,8 +64,6 @@
             </div>
             <div class="col">
               <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
-            </div>
-            <div class="col">
               <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
             </div>
             <div class="col-3 p-0">
@@ -100,6 +100,8 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/categories.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/login.js"></script>
 </body>
 
 </html>

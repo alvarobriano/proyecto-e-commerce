@@ -37,5 +37,18 @@ let getJSONData = function(url){
         result.data = error;
         hideSpinner();
         return result;
-    });
+    });    
 }
+
+
+//código de la parte 1
+function agregarCategoriaUsername (nombre_usuario) {
+  const username = document.getElementsByClassName("navbar-nav")[0];
+  username.lastElementChild.innerHTML = `<p class="nav-nombre">${nombre_usuario}</p>`;
+  return 0;
+}
+
+if (localStorage.getItem("username")){
+  agregarCategoriaUsername(localStorage.getItem("username"));
+}
+

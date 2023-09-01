@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
+
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"
@@ -20,11 +21,11 @@ document.addEventListener("DOMContentLoaded", function(){
     };
     
     function isAuthenticated() {
-        let nombre = sessionStorage.getItem("username");
+        let nombre = localStorage.getItem("username");
         if (nombre){
             return true;
         } else {
             return false;
         }
-    }
+    }   
 });
