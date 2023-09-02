@@ -96,6 +96,22 @@ async function filterAndShowProducts(minPrice, maxPrice){
         showProductList(filteredArray);
 };
 
+async function filterAndShowProductsBySearch(searchTerm) {
+    let currentArray = await pedirDatos(DATA_AUTO_URL);
+
+    if (searchTerm !== "") {
+        let filteredArray = currentArray.filter(product => {
+            const productNameLower = product.name.toLowerCase();
+            const descriptionLower = product.description.toLowerCase();
+            return productNameLower.includes(searchTerm) || descriptionLower.includes(searchTerm);
+        });
+
+        showProductList(filteredArray);
+    } else {
+        showProductList(currentArray);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     //parte 3: cuando se hace click llama a sortAndShowProducts para ordenar alfabéticamente   
@@ -150,4 +166,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
         showProductList(pedirDatos(DATA_AUTO_URL));
     });
+
 });
