@@ -51,4 +51,3 @@ function agregarCategoriaUsername (nombre_usuario) {
 if (localStorage.getItem("username")){
   agregarCategoriaUsername(localStorage.getItem("username"));
 }
-
