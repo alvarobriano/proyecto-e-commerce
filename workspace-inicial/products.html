@@ -56,28 +56,37 @@
       </div> 
       <div class="row">
         <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
-          <div class="row container p-0 m-0">
-            <div class="col">
-              <input type="search" id="productSearch" placeholder="Buscar producto por nombre">
-            </div>
-            <div class="col">
-              <p class="font-weight-normal text-end my-2">Cant.</p>
-            </div>
-            <div class="col">
-              <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
-            </div>
-            <div class="col">
-              <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
-            </div>
+          <div class="row container p-0 m-0 align-items-end justify-content-between">
             
-            <div class="col-3 p-0">
-              <div class="btn-group" role="group">
-                <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+            <div class="col text-end">
+              <div class="d-flex align-items-end justify-content-between">
+                <div class="col-5" style="margin-right: 20px;"> 
+                  <input class="form-control" type="search" id="productSearch" placeholder="Buscar por palabra">
+                </div>
+                <p class="font-weight-normal mb-2 me-2">Precio</p>
+                <div class="d-flex align-items-end">
+                  <input class="form-control me-2" type="number" placeholder="min." id="rangeFilterCountMin">
+                  <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
+                </div>
+              </div>
+              <div class="btn-group mt-2">
+                <button class="btn btn-light" id="rangeFilterCount">Filtrar</button>
                 <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       </div>   
     <div class="container" id="prod-list-container">    
       <!--<div class="alert alert-danger text-center" role="alert">
