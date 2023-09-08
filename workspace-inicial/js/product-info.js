@@ -16,24 +16,20 @@ if (selectedProductId) {
 
         // Llenar el contenedor con la información del producto
         const productInfoContainer = document.getElementById("product-info-container");
-        productInfoContainer.innerHTML = `
-          <h1>${productData.name}</h1>
-          <br>
-          <h4>Precio</h4>
-          <p>Precio: ${productData.currency} ${productData.cost}</p>
-          <br>
-          <h4>Descripcion</h4>
-          <p>${productData.description}</p>
-          <br>
-          <h4>Cantidad de vendidos</h4>
-          <p>${productData.soldCount}</p>
-          <br>
-          <h4>Imagenes Ilustrativas</h4>
-          ${productData.images.map(image => `
-            <img src="${image}" alt="${productData.description}">
-          `).join('')}
-          <!-- Puedes agregar más información aquí -->
-        `;
+        productInfoContainer.innerHTML = `<br>
+                                          <h1>${productData.name}</h1>
+                                          <hr>                                          
+                                          <h6><strong>Precio</strong></h6>
+                                          <p>${productData.currency} ${productData.cost}</p>
+                                          <h6><strong>Descripción</strong></h6>
+                                          <p>${productData.description}</p>
+                                          <h6><strong>Cantidad de vendidos</strong></h6>
+                                          <p>${productData.soldCount}</p>
+                                          <h6><strong>Imágenes ilustrativas</strong></h6>
+                                          <div class="image-container">
+                                            ${productData.images.map(image => `<img src="${image}" alt="${productData.description}">`).join('')}
+                                          </div>
+                                          <!-- Puedes agregar más información aquí -->`;
       } else {
         // Manejar errores si la solicitud no es exitosa
         console.error("Error al obtener la información del producto.");

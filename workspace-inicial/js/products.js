@@ -61,7 +61,7 @@ async function pedirDatos(url) {
 //Muestro los productos
 showProductList(pedirDatos(DATA_AUTO_URL));
 
-//parte 3: funcion que ordena alfabéticamente y por cantidad de vendidos
+//entrega 2 parte 3: funcion que ordena alfabéticamente y por cantidad de vendidos
 async function sortAndShowProducts(sortCriteria) {
   let currentArray = await pedirDatos(DATA_AUTO_URL);
   switch (sortCriteria) {
