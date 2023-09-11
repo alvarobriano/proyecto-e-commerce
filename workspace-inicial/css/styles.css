@@ -208,3 +208,24 @@ a.custom-card:hover {
   border: 1px solid #00000036; /* Agrega un borde de 1 píxel de grosor de color negro (#000) */
   padding: 5px; /* Agrega un relleno alrededor de la imagen para espaciar el borde */
 }
+
+.comentarios-lista {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.comentario {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.comentario h3 {
+  margin-top: 0;
+}
+
+.comentario p {
+  margin-bottom: 5px;
+}
