@@ -75,7 +75,7 @@ if (selectedProductId) {
         }
         
         //muestro el historial de comentarios guardado en el localStorage, si coincide con el ID del producto donde estoy
-        if (comentariosGuardados.length > 0) {
+        if (comentariosGuardados) {
           const comentariosGuardadosArray = JSON.parse(comentariosGuardados);
           for (let comentario of comentariosGuardadosArray) {
             if (comentario.productID == selectedProductId){
