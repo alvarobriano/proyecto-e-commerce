@@ -148,7 +148,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     //al array historialComentarios le guardo los que me traigo del localStorage
-    historialComentarios = JSON.parse(comentariosGuardados);
+    if (comentariosGuardados){
+      historialComentarios = JSON.parse(comentariosGuardados);
+    }
 
     if (commentText.trim() === "") {
       alert("Por favor, ingresa un comentario.");
