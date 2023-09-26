@@ -229,3 +229,7 @@ a.custom-card:hover {
 .comentario p {
   margin-bottom: 5px;
 }
+
+* {
+  font-family:'Arial';
+}

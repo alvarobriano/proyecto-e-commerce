@@ -4,12 +4,14 @@ const productInfoContainer = document.getElementById("product-info-container");
 let historialComentarios = [];
 let comentariosGuardados = localStorage.getItem("comentario");
 
+//Entrega 3, parte 2
+
 if (selectedProductId) {
   // URL de la API o de donde obtendrás la información del producto (reemplaza con tu URL)
   const PRODUCT_API_URL = `https://japceibal.github.io/emercado-api/products/${selectedProductId}.json`;
   const PRODUCT_COMMENTS_URL = `https://japceibal.github.io/emercado-api/products_comments/${selectedProductId}.json`
 
-  // Función para cargar y mostrar la información del producto
+  // Entrega 3, parte 2 y parte 3: Función para cargar y mostrar la información del producto y comentarios
   async function loadProductInfo() {
     try {
       // Realizar una solicitud GET para obtener la información del producto
