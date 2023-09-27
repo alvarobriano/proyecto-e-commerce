@@ -9,7 +9,8 @@ let comentariosGuardados = localStorage.getItem("comentario");
 if (selectedProductId) {
   // URL de la API o de donde obtendrás la información del producto (reemplaza con tu URL)
   const PRODUCT_API_URL = `https://japceibal.github.io/emercado-api/products/${selectedProductId}.json`;
-  const PRODUCT_COMMENTS_URL = `https://japceibal.github.io/emercado-api/products_comments/${selectedProductId}.json`
+  const PRODUCT_COMMENTS_URL = `https://japceibal.github.io/emercado-api/products_comments/${selectedProductId}.json`;
+  const PRODUCTS = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
 
   // Entrega 3, parte 2 y parte 3: Función para cargar y mostrar la información del producto y comentarios
   async function loadProductInfo() {
@@ -93,12 +94,53 @@ if (selectedProductId) {
     } catch (error) {
       console.error("Error en la carga de la información del producto:", error);
     }
+
+    //Entrega 4, parte 1
+    try {
+       // Realizar una solicitud GET para obtener la información del producto
+       const r_productos_recomendados = await fetch(PRODUCTS);
+
+       //contenedor para poner la información
+       const productRelated = document.getElementById("productRelated");
+
+       if (r_productos_recomendados.ok) {
+          const productos_recomendados = await r_productos_recomendados.json();
+          
+          //excluyo el producto actual en el que estoy
+          const excludedProductIndex = productos_recomendados.products.findIndex(product => product.id == selectedProductId);
+          const filteredProducts = productos_recomendados.products.filter((product, index) => index !== excludedProductIndex);
+            
+          //pongo las imágenes con cierta estructura, sólo me traigo las primeras 4 para no complicar el diseño
+          //cuando hace click en una llama a función handleProductRelatedClick para cargar el contenido
+          productRelated.innerHTML = `<div class="image-container">
+                                        ${filteredProducts.slice(0, 4).map(product => `
+                                          <button onclick="handleProductRelatedClick(${product.id})">
+                                            <img src="${product.image}" alt="${product.name}">
+                                            <h6>${product.name}</h6>
+                                          </button>
+                                        `).join('')}
+                                      </div>`;
+
+       }
+
+    } catch (error) {
+      console.error("Error en la carga de la información del producto:", error);
+    }
   }
 
   // Llamar a la función para cargar la información del producto al cargar la página
   window.addEventListener("DOMContentLoaded", loadProductInfo);
 } else {
   console.error("Identificador de producto no encontrado en el almacenamiento local.");
+}
+
+//función para cargar el contenido del producto seleccionado desde "Productos relacionados"
+function handleProductRelatedClick(productId) {
+  // Guardar el identificador del producto en el almacenamiento local
+  localStorage.setItem("selectedProductId", productId);
+
+  // Redirigir a product-info.html
+  window.location.href = "product-info.html";
 }
 
 function agregarComentario(nuevoComentario) {

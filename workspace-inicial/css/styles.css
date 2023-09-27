@@ -209,6 +209,21 @@ a.custom-card:hover {
   padding: 5px; /* Agrega un relleno alrededor de la imagen para espaciar el borde */
 }
 
+.image-container button {
+  border: none; /* Elimina el borde predeterminado de los botones */
+  background: none; /* Elimina el fondo predeterminado de los botones */
+  cursor: pointer; /* Cambia el cursor a un puntero cuando pasas el mouse sobre los botones */
+  padding: 0; /* Elimina el relleno predeterminado de los botones */
+  outline: none; /* Elimina el contorno (enfoque) cuando haces clic en los botones */
+}
+
+/* Estilos adicionales para personalizar los botones a tu gusto */
+.image-container button img {
+  width: 300px; /* Establece el ancho deseado para todas las imágenes dentro de los botones */
+  max-width: 100%; /* Ajusta el ancho máximo de las imágenes al 100% del contenedor (para mantener la relación de aspecto) */
+  display: block; /* Evita problemas de alineación */
+}
+
 .comentarios-lista {
   max-width: 600px;
   margin: 20px auto;
