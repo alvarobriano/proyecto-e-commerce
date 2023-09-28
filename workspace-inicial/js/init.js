@@ -40,12 +40,40 @@ let getJSONData = function(url){
     });    
 }
 
+//<p class="nav-nombre">${nombre_usuario}</p>
 
 //código de la parte 1
 function agregarCategoriaUsername (nombre_usuario) {
   const username = document.getElementsByClassName("navbar-nav")[0];
-  username.lastElementChild.innerHTML = `<p class="nav-nombre">${nombre_usuario}</p>`;
+  username.lastElementChild.innerHTML = `<div class="dropdown">
+                                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            ${nombre_usuario}
+                                          </button>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Mi Carrito</a></li>
+                                            <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                                            <li><a class="dropdown-item" onclick="handleDarkMode()" href="#">Modo oscuro</a></li>
+                                            <li><a class="dropdown-item" onclick="handleUsernameClick()" href="#">Cerrar Sesión</a></li>
+                                          </ul>
+                                        </div>`;
   return 0;
+}
+
+function handleUsernameClick() {
+  // Borrar datos del usuario del Local Storage
+  localStorage.removeItem('username'); // Reemplaza 'nombre_usuario' con el nombre de tu clave
+
+  // Redirigir a otra página, por ejemplo, la página de inicio de sesión
+  window.location.href = "login.html";
+}
+
+function handleDarkMode() {
+  const contenedor = document.getElementsByClassName("container");
+  
+  for (let div of contenedor) {
+    div.classList.toggle("dark-mode");
+  }
+  
 }
 
 if (localStorage.getItem("username")){

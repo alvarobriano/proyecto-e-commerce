@@ -248,3 +248,10 @@ a.custom-card:hover {
 * {
   font-family:'Arial';
 }
+
+/* Estilos para el modo oscuro */
+.dark-mode {
+  background-color: #333333;
+  color: red;
+  /* #ffffff;*/
+}
