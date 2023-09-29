@@ -7,6 +7,17 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
+window.addEventListener('DOMContentLoaded', () => {
+  const modoOscuroGuardado = localStorage.getItem('modoOscuro');
+  const contenedor = document.body; // Debes seleccionar el contenedor principal correcto
+
+  if (modoOscuroGuardado === 'true') {
+    contenedor.classList.add("dark-mode");
+  } else {
+    contenedor.classList.remove("dark-mode");
+  }
+});
+
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
@@ -68,13 +79,15 @@ function handleUsernameClick() {
 }
 
 function handleDarkMode() {
-  const contenedor = document.getElementsByClassName("container");
-  
-  for (let div of contenedor) {
-    div.classList.toggle("dark-mode");
-  }
-  
-}
+  //const contenedor = document.querySelector("main");
+  const contenedor = document.body;
+
+  contenedor.classList.toggle("dark-mode");
+
+  // Guarda el estado en el Local Storage
+  const modoOscuro = contenedor.classList.contains("dark-mode");
+  localStorage.setItem('modoOscuro', modoOscuro);
+};
 
 if (localStorage.getItem("username")){
   agregarCategoriaUsername(localStorage.getItem("username"));

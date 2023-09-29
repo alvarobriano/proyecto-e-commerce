@@ -41,6 +41,13 @@ nav a {
   font-weight: bold;
 }
 
+.jumbotron_modo_oscuro {
+  background: url('../img/cover_back_modo_oscuro.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: 6rem;
@@ -250,8 +257,56 @@ a.custom-card:hover {
 }
 
 /* Estilos para el modo oscuro */
+
 .dark-mode {
   background-color: #333333;
-  color: red;
-  /* #ffffff;*/
+  color: #fff;
+}
+
+.dark-mode .navbar {
+  background-color: #333;
+}
+
+.dark-mode .card {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .btn-group-toggle .btn-light {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .list-group-item {
+  background-color: #444;
+  color: #fff;
+}
+
+
+.dark-mode .btn-primary {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+body.dark-mode {
+  background-color: #333;
+}
+
+/* Cambia el color de fondo de los botones */
+.dark-mode .btn {
+  background-color: #555; /* Puedes ajustar este color */
+  color: #fff; /* Cambia el color del texto de los botones a blanco */
+}
+
+/* Cambia el color de fondo de los elementos de formulario */
+.dark-mode input, .dark-mode select, .dark-mode textarea {
+  background-color: #222; /* Puedes ajustar este color */
+  color: #fff; /* Cambia el color del texto a blanco */
+}
+
+/* Cambia el color de fondo del pie de página */
+.dark-mode footer {
+  background-color: #333; /* Puedes ajustar este color */
+  color: #fff; /* Cambia el color del texto del pie de página a blanco */
 }

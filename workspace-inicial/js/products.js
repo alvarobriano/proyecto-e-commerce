@@ -25,23 +25,52 @@ async function showProductList(product) {
   for (let i = 0; i < product_local.length; i++) {
     let current_car = product_local[i];
 
+    let ruta_img = "img/prod" + current_car.id + "_";
+    console.log(ruta_img);
+
     htmlContentToAppend += `
-      <div class="list-group-item list-group-item-action cursor-active">
-          <div class="row">
-              <div class="col-3">
-                  <img src="${current_car.image}" alt="${current_car.description}" class="img-thumbnail">
-              </div>
-              <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                      <h4 class="mb-1">${current_car.name} - ${current_car.currency} ${current_car.cost}</h4>
-                      <small class="text-muted">${current_car.soldCount} vendidos</small>
-                  </div>
-                  <p class="mb-1">${current_car.description}</p>
-                  <!-- Agrega un botón para cada producto que llame a la función handleProductClick -->
-                  <button class="btn btn-primary" onclick="handleProductClick(${current_car.id})">Ver Detalles</button>
-              </div>
+    <div class="list-group-item list-group-item-action cursor-active">
+  <div class="row">
+    <div class="col-3">
+      <div id="carousel${current_car.id}" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="${ruta_img}1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="${ruta_img}2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="${ruta_img}3.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="${ruta_img}4.jpg" class="d-block w-100" alt="...">
+            </div>
           </div>
+        </div>
+        <!-- Agrega controles de carrusel (flechas) si lo deseas -->
+        <a class="carousel-control-prev" href="#carousel${current_car.id}" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel${current_car.id}" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </a>
       </div>
+    </div>
+    <div class="col">
+      <div class="d-flex w-100 justify-content-between">
+        <h4 class="mb-1">${current_car.name} - ${current_car.currency} ${current_car.cost}</h4>
+        <small class="text-muted">${current_car.soldCount} vendidos</small>
+      </div>
+      <p class="mb-1">${current_car.description}</p>
+      <!-- Agrega un botón para cada producto que llame a la función handleProductClick -->
+      <button class="btn btn-primary" onclick="handleProductClick(${current_car.id})">Ver Detalles</button>
+    </div>
+  </div>
+</div>
       `;
   }
 
