@@ -41,6 +41,13 @@ nav a {
   font-weight: bold;
 }
 
+.jumbotron_modo_oscuro {
+  background: url('../img/cover_back_modo_oscuro.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: 6rem;
@@ -209,6 +216,21 @@ a.custom-card:hover {
   padding: 5px; /* Agrega un relleno alrededor de la imagen para espaciar el borde */
 }
 
+.image-container button {
+  border: none; /* Elimina el borde predeterminado de los botones */
+  background: none; /* Elimina el fondo predeterminado de los botones */
+  cursor: pointer; /* Cambia el cursor a un puntero cuando pasas el mouse sobre los botones */
+  padding: 0; /* Elimina el relleno predeterminado de los botones */
+  outline: none; /* Elimina el contorno (enfoque) cuando haces clic en los botones */
+}
+
+/* Estilos adicionales para personalizar los botones a tu gusto */
+.image-container button img {
+  width: 300px; /* Establece el ancho deseado para todas las imágenes dentro de los botones */
+  max-width: 100%; /* Ajusta el ancho máximo de las imágenes al 100% del contenedor (para mantener la relación de aspecto) */
+  display: block; /* Evita problemas de alineación */
+}
+
 .comentarios-lista {
   max-width: 600px;
   margin: 20px auto;
@@ -232,4 +254,59 @@ a.custom-card:hover {
 
 * {
   font-family:'Arial';
+}
+
+/* Estilos para el modo oscuro */
+
+.dark-mode {
+  background-color: #333333;
+  color: #fff;
+}
+
+.dark-mode .navbar {
+  background-color: #333;
+}
+
+.dark-mode .card {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .btn-group-toggle .btn-light {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .list-group-item {
+  background-color: #444;
+  color: #fff;
+}
+
+
+.dark-mode .btn-primary {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+body.dark-mode {
+  background-color: #333;
+}
+
+/* Cambia el color de fondo de los botones */
+.dark-mode .btn {
+  background-color: #555; /* Puedes ajustar este color */
+  color: #fff; /* Cambia el color del texto de los botones a blanco */
+}
+
+/* Cambia el color de fondo de los elementos de formulario */
+.dark-mode input, .dark-mode select, .dark-mode textarea {
+  background-color: #222; /* Puedes ajustar este color */
+  color: #fff; /* Cambia el color del texto a blanco */
+}
+
+/* Cambia el color de fondo del pie de página */
+.dark-mode footer {
+  background-color: #333; /* Puedes ajustar este color */
+  color: #fff; /* Cambia el color del texto del pie de página a blanco */
 }
