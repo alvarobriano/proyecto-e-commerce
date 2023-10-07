@@ -22,8 +22,13 @@ if (selectedProductId) {
         const productData = await response.json();
 
         // Llenar el contenedor con la información del producto
+  //ENTREGA 5, ¡DESAFIATE! //AL H1 SIGUIENTE LE AGREGAMOS EL BOTON DE COMPRAR CON ESAS 3 CLASES, LA BTN SUCCESS VIENE DE BOOTSTRAP
+  //Y ES LA QUE LE AGREGA ESE COLOR VERDE AL BOTÓN. ADEMAS A H1 LE PUSIMOS LA CLASE PRODUCT TITLE DEFINIDA EN CSS EN LINEA 316
         productInfoContainer.innerHTML += `<br>
-                                          <h1>${productData.name}</h1>
+                                          <h1 class="product-title"> 
+                                          ${productData.name}         
+                                          <button id="btnComprar" class="btn btn-success btn-right" id="rangeFilterCount">Comprar</button>
+                                          </h1>
                                           <hr>                                          
                                           <h6><strong>Precio</strong></h6>
                                           <p>${productData.currency} ${productData.cost}</p>

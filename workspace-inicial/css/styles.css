@@ -310,3 +310,16 @@ body.dark-mode {
   background-color: #333; /* Puedes ajustar este color */
   color: #fff; /* Cambia el color del texto del pie de página a blanco */
 }
+
+
+
+.product-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Esto alinea verticalmente los elementos si es necesario */
+}
+
+.product-title span {
+  flex-grow: 1; /* Esto hace que el nombre del producto ocupe todo el espacio restante */
+  margin-right: 10px; /* Añade un espacio entre el nombre y el botón (ajusta según tu preferencia) */
+}

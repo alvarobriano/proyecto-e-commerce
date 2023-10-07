@@ -61,7 +61,7 @@ function agregarCategoriaUsername (nombre_usuario) {
                                             ${nombre_usuario}
                                           </button>
                                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="#">Mi Carrito</a></li>
+                                            <li><a class="dropdown-item" onclick="miCarrito()" href="#">Mi Carrito</a></li>
                                             <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
                                             <li><a class="dropdown-item" onclick="handleDarkMode()" href="#">Modo oscuro</a></li>
                                             <li><a class="dropdown-item" onclick="handleUsernameClick()" href="#">Cerrar Sesión</a></li>
@@ -79,12 +79,8 @@ function handleUsernameClick() {
 }
 
 function handleDarkMode() {
-  //const contenedor = document.querySelector("main");
   const contenedor = document.body;
-
   contenedor.classList.toggle("dark-mode");
-
-  // Guarda el estado en el Local Storage
   const modoOscuro = contenedor.classList.contains("dark-mode");
   localStorage.setItem('modoOscuro', modoOscuro);
 };
@@ -92,3 +88,12 @@ function handleDarkMode() {
 if (localStorage.getItem("username")){
   agregarCategoriaUsername(localStorage.getItem("username"));
 }
+
+
+//FUNCION QUE LE DA FUNCIONALIDAD AL BOTON MICARRITO, LLEVANDOLO AL DIV DE CART.HTML
+function miCarrito () {
+    window.location.href = "cart.html"; 
+    obtenerDatosDelCarrito();
+
+}
+
