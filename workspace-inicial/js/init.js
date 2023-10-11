@@ -61,8 +61,8 @@ function agregarCategoriaUsername (nombre_usuario) {
                                             ${nombre_usuario}
                                           </button>
                                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" onclick="miCarrito()" href="#">Mi Carrito</a></li>
-                                            <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                                            <li><a class="dropdown-item" onclick="handleCart()" href="#">Mi Carrito</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="handleProfile()">Mi Perfil</a></li>
                                             <li><a class="dropdown-item" onclick="handleDarkMode()" href="#">Modo oscuro</a></li>
                                             <li><a class="dropdown-item" onclick="handleUsernameClick()" href="#">Cerrar Sesión</a></li>
                                           </ul>
@@ -72,7 +72,8 @@ function agregarCategoriaUsername (nombre_usuario) {
 
 function handleUsernameClick() {
   // Borrar datos del usuario del Local Storage
-  localStorage.removeItem('username'); // Reemplaza 'nombre_usuario' con el nombre de tu clave
+  localStorage.removeItem('username'); // Reemplaza 'nombre_usuario' con el nombre de tu clave`
+  localStorage.removeItem('productosComprados');
 
   // Redirigir a otra página, por ejemplo, la página de inicio de sesión
   window.location.href = "login.html";
@@ -89,11 +90,13 @@ if (localStorage.getItem("username")){
   agregarCategoriaUsername(localStorage.getItem("username"));
 }
 
+function handleProfile() {
+  window.location.href = "my-profile.html"; 
+}
 
 //FUNCION QUE LE DA FUNCIONALIDAD AL BOTON MICARRITO, LLEVANDOLO AL DIV DE CART.HTML
-function miCarrito () {
+function handleCart() {
     window.location.href = "cart.html"; 
     obtenerDatosDelCarrito();
-
 }
 

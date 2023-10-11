@@ -37,9 +37,54 @@
   </nav>
   <main>
     <div id="htmlCarrito" class="container">
-      <div class="alert alert-danger text-center" role="alert">
+      <h1 class="text-center">Carrito de Compras</h1>
+      <table class="table table-bordered table-striped" id="tablaCarrito">
+          <tr>
+              <th></th>
+              <th>Nombre</th>
+              <th>Costo</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+          </tr>
+      </table>
+      
+      <h2>Total: $25.00</h2>
+      <button>Realizar Compra</button>
+    
+    <hr>
+    <h2>Seleccione el tipo de envío</h2>
+    <div>
+        <label>
+            <input type="radio" name="tipoEnvio" value="Premium"> Premium
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" name="tipoEnvio" value="Express"> Express
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" name="tipoEnvio" value="Standard"> Standard
+        </label>
+    </div>
+
+    <br>
+    <h2>Dirección de envío</h2>
+    <label for="calle">Calle:</label>
+    <input type="text" id="calle" name="calle" required>
+
+    <label for="numero">Número:</label>
+    <input type="text" id="numero" name="numero" required>
+
+    <label for="esquina">Esquina:</label>
+    <input type="text" id="esquina" name="esquina" required>
+
+    <input type="button" value="Enviar" onclick="enviarDatos()">
+
+      <!-- <div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      </div> -->
     </div>
   </main>
   <footer class="text-muted">
