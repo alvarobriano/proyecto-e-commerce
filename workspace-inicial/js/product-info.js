@@ -40,24 +40,26 @@ if (selectedProductId) {
         //ENTREGA 5, ¡DESAFIATE! //AL H1 SIGUIENTE LE AGREGAMOS EL BOTON DE COMPRAR CON ESAS 3 CLASES, LA BTN SUCCESS VIENE DE BOOTSTRAP
         //Y ES LA QUE LE AGREGA ESE COLOR VERDE AL BOTÓN. ADEMAS A H1 LE PUSIMOS LA CLASE PRODUCT TITLE DEFINIDA EN CSS EN LINEA 316
         productInfoContainer.innerHTML += `<br>
-                                          <h1 class="product-title"> 
-                                          ${productData.name}         
-                                          <button id="btnComprar" class="btn btn-success btn-right" id="rangeFilterCount" onclick="handleBtnComprar(${productData.id})">Comprar</button>
-                                          </h1>
-                                          <hr>                                          
-                                          <h6><strong>Precio</strong></h6>
-                                          <p>${productData.currency} ${productData.cost}</p>
-                                          <h6><strong>Descripción</strong></h6>
-                                          <p>${productData.description}</p>
-                                          <h6><strong>Cantidad de vendidos</strong></h6>
-                                          <p>${productData.soldCount}</p>
-                                          <h6><strong>Imágenes ilustrativas</strong></h6>
-                                          <div class="image-container">
-                                            ${productData.images.map(image => `<img src="${image}" alt="${productData.description}">`).join('')}
-                                          </div>
-                                          <br>
-                                          <br> 
-                                          <h2>Comentarios</h2>`;
+                                            <div class="product-details">
+                                              <h1 class="product-title">
+                                                ${productData.name}
+                                                <button id="btnComprar" class="btn btn-success btn-right" id="rangeFilterCount" onclick="handleBtnComprar(${productData.id})">Comprar</button>
+                                              </h1>
+                                              <hr>
+                                              <h6><strong>Precio</strong></h6>
+                                              <p>${productData.currency} ${productData.cost}</p>
+                                              <h6><strong>Descripción</strong></h6>
+                                              <p>${productData.description}</p>
+                                              <h6><strong>Cantidad de vendidos</strong></h6>
+                                              <p>${productData.soldCount}</p>
+                                              <h6><strong>Imágenes ilustrativas</strong></h6>
+                                              <div class="image-container">
+                                                ${productData.images.map(image => `<img src="${image}" alt="${productData.description}">`).join('')}
+                                              </div>
+                                            </div>
+                                            <br>
+                                            <h2>Comentarios</h2>
+        `;
       } else {
         // Manejar errores si la solicitud no es exitosa
         console.error("Error al obtener la información del producto.");
