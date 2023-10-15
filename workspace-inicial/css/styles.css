@@ -310,3 +310,77 @@ body.dark-mode {
   background-color: #333; /* Puedes ajustar este color */
   color: #fff; /* Cambia el color del texto del pie de página a blanco */
 }
+
+
+
+.product-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Esto alinea verticalmente los elementos si es necesario */
+}
+
+.product-title span {
+  flex-grow: 1; /* Esto hace que el nombre del producto ocupe todo el espacio restante */
+  margin-right: 10px; /* Añade un espacio entre el nombre y el botón (ajusta según tu preferencia) */
+}
+
+@media (max-width: 768px) {
+  .filter-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-buttons button {
+    margin-bottom: 10px; /* Espacio entre botones */
+  }
+}
+
+/*RESPONSIVE PARA PRODUCT INFO*/
+.product-title {
+  font-size: 24px; /* Ajusta el tamaño de fuente del título según tu preferencia */
+  text-align: center; /* Centra el título en dispositivos móviles */
+}
+
+.product-details {
+  padding: 10px; /* Agrega espaciado alrededor de los detalles del producto */
+}
+
+.btn-right {
+  display: block; /* Hace que el botón se muestre como un bloque en lugar de inline */
+  margin-top: 10px; /* Agrega espacio superior al botón */
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las imágenes se ajusten en varias filas en dispositivos móviles */
+  justify-content: center; /* Centra las imágenes horizontalmente */
+}
+
+.image-container img {
+  max-width: 100%; /* Asegura que las imágenes no sean más anchas que su contenedor */
+  height: auto; /* Mantiene la relación de aspecto de las imágenes */
+}
+
+.responsive-form {
+  max-width: 300px; /* Limita el ancho del formulario en dispositivos móviles */
+  margin: 0 auto; /* Centra el formulario horizontalmente */
+  padding: 10px; /* Añade un espacio alrededor del formulario */
+}
+
+textarea {
+  width: 100%; /* Asegura que el campo de texto se extienda al ancho del contenedor */
+  padding: 5px; /* Añade espaciado alrededor del campo de texto */
+  box-sizing: border-box; /* Incluye el relleno en el ancho total del campo de texto */
+}
+
+select {
+  width: 100%; /* Asegura que el menú desplegable se extienda al ancho del contenedor */
+  padding: 5px; /* Añade espaciado alrededor del menú desplegable */
+  box-sizing: border-box; /* Incluye el relleno en el ancho total del menú desplegable */
+}
+
+input[type="submit"] {
+  display: block; /* Muestra el botón de envío como un bloque en lugar de en línea */
+  width: 100%; /* Asegura que el botón se extienda al ancho del contenedor */
+  margin-top: 10px; /* Agrega espacio superior al botón */
+}

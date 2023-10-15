@@ -4,8 +4,23 @@ const productInfoContainer = document.getElementById("product-info-container");
 let historialComentarios = [];
 let comentariosGuardados = localStorage.getItem("comentario");
 
-//Entrega 3, parte 2
+function handleBtnComprar(ID) {
+    // Recupera el arreglo de productos comprados del localStorage (si existe)
+    const productosCompradosJSON = localStorage.getItem("productosComprados");
+    const productosComprados = productosCompradosJSON ? JSON.parse(productosCompradosJSON) : [];
 
+    // Agrega el nuevo ID al arreglo de productos comprados
+    productosComprados.push(ID);
+
+    // Convierte el arreglo actualizado en una cadena JSON
+    const productosCompradosActualizado = JSON.stringify(productosComprados);
+
+    // Almacena la cadena JSON actualizada en el localStorage
+    localStorage.setItem("productosComprados", productosCompradosActualizado);  
+};
+
+
+//Entrega 3, parte 2
 if (selectedProductId) {
   // URL de la API o de donde obtendrás la información del producto (reemplaza con tu URL)
   const PRODUCT_API_URL = `https://japceibal.github.io/emercado-api/products/${selectedProductId}.json`;
@@ -22,22 +37,29 @@ if (selectedProductId) {
         const productData = await response.json();
 
         // Llenar el contenedor con la información del producto
+        //ENTREGA 5, ¡DESAFIATE! //AL H1 SIGUIENTE LE AGREGAMOS EL BOTON DE COMPRAR CON ESAS 3 CLASES, LA BTN SUCCESS VIENE DE BOOTSTRAP
+        //Y ES LA QUE LE AGREGA ESE COLOR VERDE AL BOTÓN. ADEMAS A H1 LE PUSIMOS LA CLASE PRODUCT TITLE DEFINIDA EN CSS EN LINEA 316
         productInfoContainer.innerHTML += `<br>
-                                          <h1>${productData.name}</h1>
-                                          <hr>                                          
-                                          <h6><strong>Precio</strong></h6>
-                                          <p>${productData.currency} ${productData.cost}</p>
-                                          <h6><strong>Descripción</strong></h6>
-                                          <p>${productData.description}</p>
-                                          <h6><strong>Cantidad de vendidos</strong></h6>
-                                          <p>${productData.soldCount}</p>
-                                          <h6><strong>Imágenes ilustrativas</strong></h6>
-                                          <div class="image-container">
-                                            ${productData.images.map(image => `<img src="${image}" alt="${productData.description}">`).join('')}
-                                          </div>
-                                          <br>
-                                          <br> 
-                                          <h2>Comentarios</h2>`;
+                                            <div class="product-details">
+                                              <h1 class="product-title">
+                                                ${productData.name}
+                                                <button id="btnComprar" class="btn btn-success btn-right" id="rangeFilterCount" onclick="handleBtnComprar(${productData.id})">Comprar</button>
+                                              </h1>
+                                              <hr>
+                                              <h6><strong>Precio</strong></h6>
+                                              <p>${productData.currency} ${productData.cost}</p>
+                                              <h6><strong>Descripción</strong></h6>
+                                              <p>${productData.description}</p>
+                                              <h6><strong>Cantidad de vendidos</strong></h6>
+                                              <p>${productData.soldCount}</p>
+                                              <h6><strong>Imágenes ilustrativas</strong></h6>
+                                              <div class="image-container">
+                                                ${productData.images.map(image => `<img src="${image}" alt="${productData.description}">`).join('')}
+                                              </div>
+                                            </div>
+                                            <br>
+                                            <h2>Comentarios</h2>
+        `;
       } else {
         // Manejar errores si la solicitud no es exitosa
         console.error("Error al obtener la información del producto.");
@@ -133,6 +155,8 @@ if (selectedProductId) {
 } else {
   console.error("Identificador de producto no encontrado en el almacenamiento local.");
 }
+
+
 
 //función para cargar el contenido del producto seleccionado desde "Productos relacionados"
 function handleProductRelatedClick(productId) {
