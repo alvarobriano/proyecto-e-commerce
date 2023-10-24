@@ -1,8 +1,42 @@
+// URL para cargar el carrito
+const userId = 25801;
+const cartUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;
+
+
+
+function habilitarFormulario(formularioHabilitar, formularioDeshabilitar) {
+  // Habilita el formulario seleccionado
+  document.getElementById(formularioHabilitar).style.display = "block";
+  
+  // Deshabilita los campos del otro formulario
+  const elementosDeshabilitar = document.querySelectorAll(`#${formularioDeshabilitar} input`);
+  for (const elemento of elementosDeshabilitar) {
+    elemento.disabled = true;
+  }
+  
+  // Habilita los campos del formulario seleccionado
+  const elementosHabilitar = document.querySelectorAll(`#${formularioHabilitar} input`);
+  for (const elemento of elementosHabilitar) {
+    elemento.disabled = false;
+  }
+
+  // Actualiza el mensaje de forma de pago
+  const formaPagoSeleccionada = document.querySelector(`input[name="FormaPago"]:checked`);
+  const mensajeFormaPago = document.getElementById("mensajeFormaPago");
+  
+  if (formaPagoSeleccionada) {
+    mensajeFormaPago.textContent = `Forma de pago seleccionada: ${formaPagoSeleccionada.value}`;
+  } else {
+    mensajeFormaPago.textContent = "No se ha seleccionado";
+  }
+}
+
+
+
 // Definición de funciones
 
-function calcularTotal() {
+function calcularSubtotal() {
   const subtotalElements = document.querySelectorAll('.subtotal');
-  let totalUYU = 0;
   let totalUSD = 0;
 
   subtotalElements.forEach(subtotalElement => {
@@ -11,14 +45,11 @@ function calcularTotal() {
 
     const currency = subtotalElement.textContent.includes("UYU") ? "UYU" : "USD";
     if (currency === "UYU") {
-      totalUYU += subtotal;
+      totalUSD += subtotal/40;
     } else {
       totalUSD += subtotal;
     }
   });
-
-  const totalUYUElement = document.getElementById('totalAmountUYU');
-  totalUYUElement.textContent = `UYU ${totalUYU.toFixed(2)}`;
 
   const totalUSDElement = document.getElementById('totalAmountUSD');
   totalUSDElement.textContent = `USD ${totalUSD.toFixed(2)}`;
@@ -32,7 +63,21 @@ function actualizarSubtotal(input, precioUnitario, currency) {
   subtotalElement.textContent = `${currency} ${subtotal.toFixed(2)}`;
 
   // Llama a la función para calcular y mostrar el total
-  calcularTotal();
+  calcularSubtotal();
+
+  // Obtiene el valor del radio button tipoEnvio seleccionado
+  const tipoEnvioRadios = document.getElementsByName("tipoEnvio");
+  let tipoEnvioSeleccionado = null;
+
+  for (const radio of tipoEnvioRadios) {
+    if (radio.checked) {
+      tipoEnvioSeleccionado = radio.value;
+      break; // Rompe el bucle si encuentra un radio seleccionado
+    }
+  }
+
+  // Ahora tienes el valor de tipoEnvioSeleccionado
+  updateTotalyEnvio(tipoEnvioSeleccionado);
 }
 
 async function obtenerDatosDelCarrito() {
@@ -94,12 +139,122 @@ async function mostrarInformacionEnTabla(carrito) {
   }
 
   // Calcular y mostrar el total
-  calcularTotal();
+  calcularSubtotal();
 }
 
-// URL para cargar el carrito
-const userId = 25801;
-const cartUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;
+// Función para actualizar el subtotal total
+function updateTotalyEnvio(selectedShippingOption) {
+  const subtotalElement = document.getElementById("totalAmountUSD");
+  const shippingCostElement = document.getElementById("shippingCostUSD");
+
+  // Definir los porcentajes de costo para cada opción
+  const shippingOptions = {
+    Premium: 0.15,  // 15%
+    Express: 0.07,  // 7%
+    Standard: 0.05  // 5%
+  };
+
+  // Obtener el porcentaje de costo del objeto shippingOptions
+  const selectedShippingPercentage = shippingOptions[selectedShippingOption];      
+
+  // Obtén el valor del subtotal del elemento HTML
+  const subtotalText = subtotalElement.textContent;
+  
+  // Extrae el valor numérico del subtotal (eliminando "USD " del inicio)
+  const subtotal = parseFloat(subtotalText.replace("USD ", ""));
+
+  // Obtener el costo total en función del porcentaje
+  const totalShippingCost = selectedShippingPercentage * subtotal; // Suponiendo que el costo base es 100.0 USD
+
+  // Actualizar el costo de envío en la página
+  shippingCostElement.textContent = `USD ${totalShippingCost.toFixed(2)}`;
+
+  // Supongamos que tienes un elemento que muestra el subtotal en tu HTML
+  const totalElement = document.getElementById("Total");
+
+  const total = subtotal + totalShippingCost;
+
+  // Actualiza el elemento que muestra el total
+  totalElement.textContent = `USD ${total.toFixed(2)}`;
+}
 
 // Llamar a la función para cargar la información del producto al cargar la página
 window.addEventListener("DOMContentLoaded", obtenerDatosDelCarrito);
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Obtener los elementos relevantes
+  const radioButtons = document.getElementsByName("tipoEnvio");
+  // Obtén el elemento de feedback para el tipo de envío
+  const tipoEnvioFeedback = document.getElementById("tipoEnvioFeedback");
+  const tipoDireccionFeedback = document.getElementById("tipoDireccionFeedback");
+  // Obtén el botón "Finalizar compra"
+  const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
+
+  // Escuchar cambios en los botones de radio
+  radioButtons.forEach(function (radioButton) {
+    radioButton.addEventListener("change", function () {
+      // Obtener el valor del botón de radio seleccionado (como una cadena de texto)
+      const selectedShippingOption = radioButton.value;
+
+      // Llamar a una función para actualizar el subtotal total
+      updateTotalyEnvio(selectedShippingOption);
+    });
+  });
+
+  // Obtén los elementos de los campos de dirección de envío
+  const calleInput = document.getElementById("calle");
+  const numeroInput = document.getElementById("numero");
+  const esquinaInput = document.getElementById("esquina");
+
+    
+
+  // Escucha los cambios en los campos de dirección de envío
+  calleInput.addEventListener("input", habilitarBotonCompra);
+  numeroInput.addEventListener("input", habilitarBotonCompra);
+  esquinaInput.addEventListener("input", habilitarBotonCompra);
+
+  // Función para habilitar o deshabilitar el botón "Finalizar compra"
+  function habilitarBotonCompra() {
+    const camposValidos = [];
+
+    // Valida cada campo individualmente
+    if (calleInput.value) {
+      calleInput.classList.remove("is-invalid");
+      camposValidos.push(true);
+    } else {
+      calleInput.classList.add("is-invalid");
+      camposValidos.push(false);
+    }
+
+    if (numeroInput.value) {
+      numeroInput.classList.remove("is-invalid");
+      camposValidos.push(true);
+    } else {
+      numeroInput.classList.add("is-invalid");
+      camposValidos.push(false);
+    }
+
+    if (esquinaInput.value) {
+      esquinaInput.classList.remove("is-invalid");
+      camposValidos.push(true);
+    } else {
+      esquinaInput.classList.add("is-invalid");
+      camposValidos.push(false);
+    }
+
+    const camposCompletos = [calleInput.value, numeroInput.value, esquinaInput.value];
+    const todosCamposCompletos = camposCompletos.every((valor) => valor.trim() !== "");
+
+    // Mostrar feedback para los campos de dirección de envío
+    tipoDireccionFeedback.textContent = todosCamposCompletos
+      ? ""
+      : "Por favor, complete todos los campos de dirección de envío.";
+
+    // Habilita o deshabilita el botón en función de si los tres campos están completos
+    btnFinalizarCompra.disabled = !todosCamposCompletos;
+  }
+
+  // Llama a la función al cargar la página para comprobar el estado inicial
+  habilitarBotonCompra();
+});

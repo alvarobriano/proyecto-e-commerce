@@ -56,27 +56,28 @@
         <!-- Añade más filas de la tabla aquí -->
       </table>
       </div>
-      <h2>Total : <span id="totalAmountUYU">UYU $0.00</span></h2>
-      <h2>Total : <span id="totalAmountUSD">USD $0.00</span></h2>
+      
       <hr>
-      <h2>Seleccione el tipo de envío</h2>
-      <div>
-        <label>
-          <input type="radio" name="tipoEnvio" value="Premium"> Premium
-        </label>
-      </div>
-      <div>
-        <label>
-          <input type="radio" name="tipoEnvio" value="Express"> Express
-        </label>
-      </div>
-      <div>
-        <label>
-          <input type="radio" name="tipoEnvio" value="Standard"> Standard
-        </label>
-        
-        <div class="container">
-          <h1 class="text-center">Dirección de Envío</h1>
+      <div class="container">
+        <h2>Seleccione el tipo de envío</h2>
+        <div>
+          <label>
+            <input type="radio" name="tipoEnvio" value="Premium"> Premium 2 a 5 días (15%)
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="radio" name="tipoEnvio" value="Express"> Express 5 a 8 días (7%)
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="radio" name="tipoEnvio" value="Standard"> Standard 12 a 15 días (5%)
+          </label>
+        </div>
+        <div id="tipoEnvioFeedback" class="text-danger"></div>
+          <br>
+          <h2>Dirección de Envío</h2>
       
           <form>
             <div class="mb-3">
@@ -93,11 +94,116 @@
               <label for="esquina" class="form-label">Esquina:</label>
               <input type="text" class="form-control" id="esquina" name="esquina" required placeholder="Ej: Av.Luis Alberto de Herrera">
             </div>
+
+            <div id="tipoDireccionFeedback" class="invalid-feedback"></div>
       
             <button type="submit" class="btn btn-primary">Enviar</button>
           </form>
-        </div>
-        
+          
+          <hr>
+          <div id="Costos">
+            <h2>Costos</h2>
+            <div class="list-group-item list-group-item-action cursor-active">
+              <div class="row">
+                <div class="col">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h4 class="mb-1">Subtotal (USD)</h4>
+                    <h5 class="text-muted"><span id="totalAmountUSD">USD 0.00</span></h5>
+                  </div>
+                  <p class="mb-1">Costo unitario del producto por unidad</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                  <h4 class="mb-1">Costo de envío (USD)</h4>
+                  <h5 class="text-muted"><span id="shippingCostUSD">USD 0.00</span></h5>
+                </div>
+                <p class="mb-1">Según tipo de envío</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                  <h4 class="mb-1">Total (USD)</h4>
+                  <h5 class="text-bold"><span id="Total">USD 0.00</span></h5>
+                </div>
+                <p class="mb-1">Según tipo de envío</p>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <h2>Forma de pago</h2>
+          <div class="col-sm-12">
+            <p id="mensajeFormaPago">No ha seleccionado</p> <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal"
+              data-bs-target="#modalTerminos">Seleccionar</button>
+          </div>
+          <div class="modal fade" id="modalTerminos" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5">Términos y condiciones del servicio.</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <label>
+                    <input type="radio" name="FormaPago" value="Tarjeta" onclick="habilitarFormulario('tarjetaFormulario', 'transferenciaFormulario')"> Tarjeta de crédito
+                  </label>
+                  <hr>
+                  <div id="tarjetaFormulario">
+                    <div class="row g-3">
+                      <div class="col-sm-7">
+                        <label for="nombre" class="form-label">Numero de tarjeta</label>
+                        <input type="text" class="form-control" id="nombre" required>
+                        <div class="invalid-feedback" id="feedbackNombre">
+                        </div>
+                      </div>
+                    
+                      <div class="col-sm-5">
+                        <label for="apellido" class="form-label">Cod. de seguridad</label>
+                        <input type="text" class="form-control" id="apellido" required>
+                        <div class="invalid-feedback" id="feedbackApellido">
+                        </div>
+                      </div>
+                    </div>
+
+                      <div class="row g-2">
+                        <div class="col-sm-7">
+                          <label for="nombre" class="form-label">Vencimiento</label>
+                          <input type="text" class="form-control" id="nombre" required>
+                          <div class="invalid-feedback" id="feedbackNombre">
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                    <label>
+                      <input type="radio" name="FormaPago" value="Transferencia" onclick="habilitarFormulario('transferenciaFormulario', 'tarjetaFormulario')"> Transferencia Bancaria
+                    </label>
+                    <hr>
+                    
+                    <div id="transferenciaFormulario">
+                      <div class="row">
+                        <div class="col-sm-7">
+                          <label for="nombre" class="form-label">Número de cuenta</label>
+                          <input type="text" class="form-control" id="nombre" required>
+                          <div class="invalid-feedback" id="feedbackNombre">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <button class="btn btn-primary w-100" type="submit" id="btnFinalizarCompra">Finalizar compra</button>
+      </div> 
   </main>
 
   <footer class="text-muted">
