@@ -58,12 +58,20 @@ function calcularSubtotal() {
 
 function actualizarSubtotal(input, precioUnitario, currency) {
   const cantidad = parseInt(input.value, 10); // Obtiene el valor del input como un número entero
-  const subtotal = cantidad * precioUnitario; // Calcula el subtotal
+
+  if (cantidad <= 0) {
+    alert("La cantidad de artículos debe ser mayor o igual a 1");
+    input.value = 1; // Restablece la cantidad a 1
+  }
+
+  const subtotal = input.value * precioUnitario; // Calcula el subtotal
   const subtotalElement = input.parentElement.nextElementSibling; // Obtiene el elemento donde mostrar el subtotal
   subtotalElement.textContent = `${currency} ${subtotal.toFixed(2)}`;
 
   // Llama a la función para calcular y mostrar el total
   calcularSubtotal();
+
+;
 
   // Obtiene el valor del radio button tipoEnvio seleccionado
   const tipoEnvioRadios = document.getElementsByName("tipoEnvio");
@@ -79,6 +87,7 @@ function actualizarSubtotal(input, precioUnitario, currency) {
   // Ahora tienes el valor de tipoEnvioSeleccionado
   updateTotalyEnvio(tipoEnvioSeleccionado);
 }
+
 
 async function obtenerDatosDelCarrito() {
   try {
@@ -202,6 +211,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  
+
   // Obtén los elementos de los campos de dirección de envío
   const calleInput = document.getElementById("calle");
   const numeroInput = document.getElementById("numero");
@@ -214,11 +225,12 @@ document.addEventListener("DOMContentLoaded", function () {
   numeroInput.addEventListener("input", habilitarBotonCompra);
   esquinaInput.addEventListener("input", habilitarBotonCompra);
 
-  // Función para habilitar o deshabilitar el botón "Finalizar compra"
   function habilitarBotonCompra() {
     const camposValidos = [];
-
-    // Valida cada campo individualmente
+    const tipoEnvioRadios = document.getElementsByName("tipoEnvio");
+    
+  
+    // Valida cada campo de dirección individualmente
     if (calleInput.value) {
       calleInput.classList.remove("is-invalid");
       camposValidos.push(true);
@@ -226,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
       calleInput.classList.add("is-invalid");
       camposValidos.push(false);
     }
-
+  
     if (numeroInput.value) {
       numeroInput.classList.remove("is-invalid");
       camposValidos.push(true);
@@ -234,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
       numeroInput.classList.add("is-invalid");
       camposValidos.push(false);
     }
-
+  
     if (esquinaInput.value) {
       esquinaInput.classList.remove("is-invalid");
       camposValidos.push(true);
@@ -242,18 +254,26 @@ document.addEventListener("DOMContentLoaded", function () {
       esquinaInput.classList.add("is-invalid");
       camposValidos.push(false);
     }
-
-    const camposCompletos = [calleInput.value, numeroInput.value, esquinaInput.value];
-    const todosCamposCompletos = camposCompletos.every((valor) => valor.trim() !== "");
-
-    // Mostrar feedback para los campos de dirección de envío
-    tipoDireccionFeedback.textContent = todosCamposCompletos
+  
+    // Verifica si al menos un botón de tipo de envío está seleccionado
+    const tipoEnvioSeleccionado = Array.from(tipoEnvioRadios).some(radio => radio.checked);
+    const formaPagoRadios = document.getElementsByName("FormaPago");
+    const formaPagoSeleccionada = Array.from(formaPagoRadios).some(radio => radio.checked);
+  
+    // Muestra el feedback para los campos de dirección, tipo de envío y forma de pago
+    tipoDireccionFeedback.textContent = camposValidos.every(Boolean)
       ? ""
       : "Por favor, complete todos los campos de dirección de envío.";
-
-    // Habilita o deshabilita el botón en función de si los tres campos están completos
-    btnFinalizarCompra.disabled = !todosCamposCompletos;
+    tipoEnvioFeedback.textContent = tipoEnvioSeleccionado
+      ? ""
+      : "Por favor, seleccione un tipo de envío.";
+    
+  
+    // Habilita o deshabilita el botón en función de si todos los campos son válidos
+    btnFinalizarCompra.disabled = !(camposValidos.every(Boolean) && tipoEnvioSeleccionado);
   }
+  
+  
 
   // Llama a la función al cargar la página para comprobar el estado inicial
   habilitarBotonCompra();
