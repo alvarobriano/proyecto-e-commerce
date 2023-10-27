@@ -52,6 +52,7 @@
           <th>Costo</th>
           <th>Cantidad</th>
           <th>Subtotal</th>
+          <th>Eliminar</th>
         </tr>
         <!-- Añade más filas de la tabla aquí -->
       </table>
@@ -96,8 +97,7 @@
             </div>
 
             <div id="tipoDireccionFeedback" class="invalid-feedback"></div>
-      
-            <button type="submit" class="btn btn-primary">Enviar</button>
+
           </form>
           
           <hr>
@@ -137,7 +137,7 @@
 
           <h2>Forma de pago</h2>
           <div class="col-sm-12">
-            <p id="mensajeFormaPago">No ha seleccionado</p> <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal"
+            <p id="mensajeFormaPago" style="color: red;">No ha seleccionado una forma de pago</p> <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal"
               data-bs-target="#modalTerminos">Seleccionar</button>
           </div>
           <div class="modal fade" id="modalTerminos" tabindex="-1" aria-hidden="true">
@@ -149,21 +149,21 @@
                 </div>
                 <div class="modal-body">
                   <label>
-                    <input type="radio" name="FormaPago" value="Tarjeta" onclick="habilitarFormulario('tarjetaFormulario', 'transferenciaFormulario')"> Tarjeta de crédito
+                    <input type="radio" name="FormaPago" value="Tarjeta" onclick="habilitarFormulario('tarjetaFormulario', 'transferenciaFormulario')" id="Credito"> Tarjeta de crédito
                   </label>
                   <hr>
                   <div id="tarjetaFormulario">
                     <div class="row g-3">
                       <div class="col-sm-7">
-                        <label for="nombre" class="form-label">Numero de tarjeta</label>
-                        <input type="text" class="form-control" id="nombre" required>
+                        <label for="nombre" class="form-label" >Numero de tarjeta</label>
+                        <input type="text" class="form-control" id="NumTarjeta" name="FormularioPago" required>
                         <div class="invalid-feedback" id="feedbackNombre">
                         </div>
                       </div>
                     
                       <div class="col-sm-5">
                         <label for="apellido" class="form-label">Cod. de seguridad</label>
-                        <input type="text" class="form-control" id="apellido" required>
+                        <input type="text" class="form-control" id="CodSeguridad" name="FormularioPago" required>
                         <div class="invalid-feedback" id="feedbackApellido">
                         </div>
                       </div>
@@ -172,7 +172,7 @@
                       <div class="row g-2">
                         <div class="col-sm-7">
                           <label for="nombre" class="form-label">Vencimiento</label>
-                          <input type="text" class="form-control" id="nombre" required>
+                          <input type="text" class="form-control" id="Venc" name="FormularioPago" required>
                           <div class="invalid-feedback" id="feedbackNombre">
                           </div>
                         </div>
@@ -180,7 +180,7 @@
                   </div>
 
                     <label>
-                      <input type="radio" name="FormaPago" value="Transferencia" onclick="habilitarFormulario('transferenciaFormulario', 'tarjetaFormulario')"> Transferencia Bancaria
+                      <input type="radio" name="FormaPago" value="Transferencia" onclick="habilitarFormulario('transferenciaFormulario', 'tarjetaFormulario')" id="Transfer"> Transferencia Bancaria
                     </label>
                     <hr>
                     
@@ -188,22 +188,38 @@
                       <div class="row">
                         <div class="col-sm-7">
                           <label for="nombre" class="form-label">Número de cuenta</label>
-                          <input type="text" class="form-control" id="nombre" required>
-                          <div class="invalid-feedback" id="feedbackNombre">
+                          <input type="text" class="form-control" id="NumCuenta" required>
                           </div>
                         </div>
                       </div>
                     </div>
 
+                    <div class="container" style="color: red;" id="FeedbackFormaPagoModal"></div>
+
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           <br>
+          <div class="container" style="color: red;" id="FeedbackFormaPago"></div>
           <button class="btn btn-primary w-100" type="submit" id="btnFinalizarCompra">Finalizar compra</button>
-      </div> 
+
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-success" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-body-success">
+                  <h2 class="text-success">Has comprado con éxito</h2>
+                  <p class="text-success">Tu compra se ha realizado satisfactoriamente. ¡Gracias!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+           
   </main>
 
   <footer class="text-muted">

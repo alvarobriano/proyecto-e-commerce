@@ -20,6 +20,7 @@ function handleBtnComprar(ID) {
 };
 
 
+
 //Entrega 3, parte 2
 if (selectedProductId) {
   // URL de la API o de donde obtendrás la información del producto (reemplaza con tu URL)
