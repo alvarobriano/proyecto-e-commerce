@@ -1,97 +1,80 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const userProfileForm = document.getElementById("userProfileForm");
-
-    // Usando el email que se guardo cuando el usuario se logeo en localStorage se hizo un if
+    // Verificar si el usuario está logueado a través de su email guardado en localStorage
     const userEmail = localStorage.getItem("username");
-    if (userEmail) {
-        document.getElementById("email").value = userEmail;
-    } else {
+    if (!userEmail) {
         alert('Debes estar logueado para acceder al perfil.');
         window.location.href = "login.html";
+        return; // Detiene la ejecución si el usuario no está logueado
     }
 
-    userProfileForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-    
-        const nombre = document.getElementById("nombre").value;
-        const segundoNombre = document.getElementById("segundoNombre").value;
-        const apellido = document.getElementById("apellido").value;
-        const segundoApellido = document.getElementById("segundoApellido").value;
-        const email = document.getElementById("email").value;
-        const telefono = document.getElementById("telefono").value;
-    
-        // Validar campos obligatorios
-        if (!nombre || !apellido || !email) {
-            alert("Por favor, completa los campos obligatorios.");
-            return;
+    // Función para cargar la información de perfil desde localStorage
+    function loadUserProfile(email) {
+        const userProfileString = localStorage.getItem(email);
+        if (userProfileString) {
+            // Parsear los datos del usuario y cargarlos en el formulario
+            const userProfile = JSON.parse(userProfileString);
+            document.getElementById("nombre").value = userProfile.nombre || '';
+            document.getElementById("segundoNombre").value = userProfile.segundoNombre || '';
+            document.getElementById("apellido").value = userProfile.apellido || '';
+            document.getElementById("segundoApellido").value = userProfile.segundoApellido || '';
+            document.getElementById("email").value = userProfile.email || '';
+            document.getElementById("telefono").value = userProfile.telefono || '';
+            document.getElementById("displayedProfileImage").src = userProfile.profileImage || "C:\Users\Acer\Desktop\Jovenes a Programar\Fase 2\descarga.png";
+        } else {
+            // Si no hay datos guardados, cargar imagen por defecto
+            document.getElementById("displayedProfileImage").src = "C:\Users\Acer\Desktop\Jovenes a Programar\Fase 2\descarga.png";
         }
-    
-        // Guardar en localStorage
-        localStorage.setItem("userName", nombre);
-        localStorage.setItem("userSecondName", segundoNombre);
-        localStorage.setItem("userLastName", apellido);
-        localStorage.setItem("userSecondLastName", segundoApellido);
-        localStorage.setItem("loggedUserEmail", email);
-        localStorage.setItem("userPhone", telefono);
-    
-        alert("Datos guardados correctamente.");
-    });
-
-    // Código para mostrar la imagen guardada o una por defecto
-    let defaultProfileImage = "url_de_imagen_por_defecto.jpg";
-    let savedProfileImage = localStorage.getItem("userProfileImage");
-
-    if (savedProfileImage) {
-        document.getElementById("displayedProfileImage").src = savedProfileImage;
-    } else {
-        document.getElementById("displayedProfileImage").src = defaultProfileImage;
     }
 
-    // Funcionalidad para previsualizar y guardar la imagen seleccionada
+    // Cargar los datos del perfil del usuario
+    loadUserProfile(userEmail);
+
+    // Guardar la información del perfil del usuario en localStorage
+    function saveUserProfile(email, data) {
+        localStorage.setItem(email, JSON.stringify(data));
+    }
+
+    // Evento para manejar cambios en la imagen de perfil
     document.getElementById("profileImage").addEventListener("change", function(event) {
         let reader = new FileReader();
         reader.onload = function(e) {
+            // Actualizar la imagen mostrada
             document.getElementById("displayedProfileImage").src = e.target.result;
-            localStorage.setItem("userProfileImage", e.target.result);
-        }
+            // Obtener los datos actuales del formulario para actualizar la imagen
+            const currentData = {
+                nombre: document.getElementById("nombre").value,
+                segundoNombre: document.getElementById("segundoNombre").value,
+                apellido: document.getElementById("apellido").value,
+                segundoApellido: document.getElementById("segundoApellido").value,
+                email: document.getElementById("email").value,
+                telefono: document.getElementById("telefono").value,
+                profileImage: e.target.result
+            };
+            // Guardar los datos actualizados en localStorage
+            saveUserProfile(userEmail, currentData);
+        };
         reader.readAsDataURL(event.target.files[0]);
     });
 
-    // Cargar datos previamente guardados en el formulario:
-    // Nombre
-    const savedNombre = localStorage.getItem("userName");
-    if (savedNombre) {
-        document.getElementById("nombre").value = savedNombre;
-    }
+    // Evento para manejar el envío del formulario de perfil
+    const userProfileForm = document.getElementById("userProfileForm");
+    userProfileForm.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    // Segundo nombre
-    const savedSegundoNombre = localStorage.getItem("userSecondName");
-    if (savedSegundoNombre) {
-        document.getElementById("segundoNombre").value = savedSegundoNombre;
-    }
+        // Recopilar la información del formulario
+        const userProfileData = {
+            nombre: document.getElementById("nombre").value,
+            segundoNombre: document.getElementById("segundoNombre").value,
+            apellido: document.getElementById("apellido").value,
+            segundoApellido: document.getElementById("segundoApellido").value,
+            email: document.getElementById("email").value,
+            telefono: document.getElementById("telefono").value,
+            profileImage: document.getElementById("displayedProfileImage").src
+        };
 
-    // Apellido
-    const savedApellido = localStorage.getItem("userLastName");
-    if (savedApellido) {
-        document.getElementById("apellido").value = savedApellido;
-    }
+        // Guardar la información del perfil en localStorage
+        saveUserProfile(userEmail, userProfileData);
 
-    // Segundo apellido
-    const savedSegundoApellido = localStorage.getItem("userSecondLastName");
-    if (savedSegundoApellido) {
-        document.getElementById("segundoApellido").value = savedSegundoApellido;
-    }
-
-    // Email
-    const savedEmail = localStorage.getItem("loggedUserEmail");
-    if (savedEmail) {
-        document.getElementById("email").value = savedEmail;
-    }
-
-    // Teléfono de contacto
-    const savedTelefono = localStorage.getItem("userPhone");
-    if (savedTelefono) {
-        document.getElementById("telefono").value = savedTelefono;
-    }
-
+        alert("Datos guardados correctamente.");
+    });
 });
