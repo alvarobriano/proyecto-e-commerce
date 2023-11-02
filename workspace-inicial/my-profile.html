@@ -51,11 +51,46 @@
     </div>
   </nav>
   <main>
+    
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <h2>Perfil del usuario</h2>
+      <form id="userProfileForm">
+        <!-- Dentro del formulario de perfil este lebel sirve para guardar la imagen -->
+         <label for="profileImage">Imagen de perfil:</label>
+         <input type="file" id="profileImage" accept="image/*">
+         <img id="displayedProfileImage" src="" alt="Imagen de perfil" style="max-width: 150px; max-height: 150px;">
+         <div class="profile-pic-container">
+          
+          
       </div>
-    </div>
+
+          <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre*</label>
+              <input type="text" class="form-control" id="nombre" required>
+          </div>
+          <div class="mb-3">
+              <label for="segundoNombre" class="form-label">Segundo nombre</label>
+              <input type="text" class="form-control" id="segundoNombre">
+          </div>
+          <div class="mb-3">
+              <label for="apellido" class="form-label">Apellido*</label>
+              <input type="text" class="form-control" id="apellido" required>
+          </div>
+          <div class="mb-3">
+              <label for="segundoApellido" class="form-label">Segundo apellido</label>
+              <input type="text" class="form-control" id="segundoApellido">
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">E-mail*</label>
+              <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono de contacto</label>
+              <input type="tel" class="form-control" id="telefono">
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+  </div>
   </main>
   <footer class="text-muted">
     <div class="container">

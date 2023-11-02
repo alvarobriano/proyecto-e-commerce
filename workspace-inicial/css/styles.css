@@ -384,3 +384,62 @@ input[type="submit"] {
   width: 100%; /* Asegura que el botón se extienda al ancho del contenedor */
   margin-top: 10px; /* Agrega espacio superior al botón */
 }
+
+#userProfileForm {
+  max-width: 800px;
+  margin: 30px auto;
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+#userProfileForm label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+#userProfileForm input[type="text"],
+#userProfileForm input[type="email"],
+#userProfileForm input[type="tel"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 25px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+#userProfileForm input[type="text"]:focus,
+#userProfileForm input[type="email"]:focus,
+#userProfileForm input[type="tel"]:focus {
+  border-color: #007bff;
+}
+
+#userProfileForm button {
+  padding: 12px 25px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+
+#displayedProfileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 25px;
+}
+
+
+
