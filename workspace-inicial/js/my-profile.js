@@ -1,77 +1,97 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const userEmail = localStorage.getItem("loggedUserEmail");
-    if (!userEmail) {
+    const userProfileForm = document.getElementById("userProfileForm");
+
+    // Usando el email que se guardo cuando el usuario se logeo en localStorage se hizo un if
+    const userEmail = localStorage.getItem("username");
+    if (userEmail) {
+        document.getElementById("email").value = userEmail;
+    } else {
         alert('Debes estar logueado para acceder al perfil.');
         window.location.href = "login.html";
-        return;
     }
 
-    const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-        loginForm.addEventListener("submit", handleLogin);
+    userProfileForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+    
+        const nombre = document.getElementById("nombre").value;
+        const segundoNombre = document.getElementById("segundoNombre").value;
+        const apellido = document.getElementById("apellido").value;
+        const segundoApellido = document.getElementById("segundoApellido").value;
+        const email = document.getElementById("email").value;
+        const telefono = document.getElementById("telefono").value;
+    
+        // Validar campos obligatorios
+        if (!nombre || !apellido || !email) {
+            alert("Por favor, completa los campos obligatorios.");
+            return;
+        }
+    
+        // Guardar en localStorage
+        localStorage.setItem("userName", nombre);
+        localStorage.setItem("userSecondName", segundoNombre);
+        localStorage.setItem("userLastName", apellido);
+        localStorage.setItem("userSecondLastName", segundoApellido);
+        localStorage.setItem("loggedUserEmail", email);
+        localStorage.setItem("userPhone", telefono);
+    
+        alert("Datos guardados correctamente.");
+    });
+
+    // Código para mostrar la imagen guardada o una por defecto
+    let defaultProfileImage = "url_de_imagen_por_defecto.jpg";
+    let savedProfileImage = localStorage.getItem("userProfileImage");
+
+    if (savedProfileImage) {
+        document.getElementById("displayedProfileImage").src = savedProfileImage;
+    } else {
+        document.getElementById("displayedProfileImage").src = defaultProfileImage;
     }
 
-    const userProfileForm = document.getElementById("userProfileForm");
-    if (userProfileForm) {
-        loadUserProfile(userEmail);
-        userProfileForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            saveUserProfile(userEmail);
-        });
+    // Funcionalidad para previsualizar y guardar la imagen seleccionada
+    document.getElementById("profileImage").addEventListener("change", function(event) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("displayedProfileImage").src = e.target.result;
+            localStorage.setItem("userProfileImage", e.target.result);
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    });
+
+    // Cargar datos previamente guardados en el formulario:
+    // Nombre
+    const savedNombre = localStorage.getItem("userName");
+    if (savedNombre) {
+        document.getElementById("nombre").value = savedNombre;
     }
+
+    // Segundo nombre
+    const savedSegundoNombre = localStorage.getItem("userSecondName");
+    if (savedSegundoNombre) {
+        document.getElementById("segundoNombre").value = savedSegundoNombre;
+    }
+
+    // Apellido
+    const savedApellido = localStorage.getItem("userLastName");
+    if (savedApellido) {
+        document.getElementById("apellido").value = savedApellido;
+    }
+
+    // Segundo apellido
+    const savedSegundoApellido = localStorage.getItem("userSecondLastName");
+    if (savedSegundoApellido) {
+        document.getElementById("segundoApellido").value = savedSegundoApellido;
+    }
+
+    // Email
+    const savedEmail = localStorage.getItem("loggedUserEmail");
+    if (savedEmail) {
+        document.getElementById("email").value = savedEmail;
+    }
+
+    // Teléfono de contacto
+    const savedTelefono = localStorage.getItem("userPhone");
+    if (savedTelefono) {
+        document.getElementById("telefono").value = savedTelefono;
+    }
+
 });
-
-function handleLogin(event) {
-    event.preventDefault();
-
-    const nombre = document.getElementById("username").value;
-    const email = document.getElementById("useremail").value;
-
-    if (!nombre || !email) {
-        alert("Por favor rellene los campos");
-        return;
-    }
-
-    const users = JSON.parse(localStorage.getItem("users")) || {};
-    users[email] = { username: nombre, email: email };
-    localStorage.setItem("users", JSON.stringify(users));
-    localStorage.setItem("loggedUserEmail", email);
-
-    window.location.href = "index.html";
-}
-
-function loadUserProfile(userEmail) {
-    const userProfile = JSON.parse(localStorage.getItem("userProfile_" + userEmail)) || {};
-    document.getElementById("nombre").value = userProfile.nombre || "";
-    document.getElementById("segundoNombre").value = userProfile.segundoNombre || "";
-    document.getElementById("apellido").value = userProfile.apellido || "";
-    document.getElementById("segundoApellido").value = userProfile.segundoApellido || "";
-    document.getElementById("email").value = userProfile.email || userEmail;
-    document.getElementById("telefono").value = userProfile.telefono || "";
-}
-
-function saveUserProfile(userEmail) {
-    const nombre = document.getElementById("nombre").value;
-    const segundoNombre = document.getElementById("segundoNombre").value;
-    const apellido = document.getElementById("apellido").value;
-    const segundoApellido = document.getElementById("segundoApellido").value;
-    const email = document.getElementById("email").value;
-    const telefono = document.getElementById("telefono").value;
-
-    if (!nombre || !apellido || !email) {
-        alert("Por favor, completa los campos obligatorios.");
-        return;
-    }
-
-    const userProfile = {
-        nombre: nombre,
-        segundoNombre: segundoNombre,
-        apellido: apellido,
-        segundoApellido: segundoApellido,
-        email: email,
-        telefono: telefono
-    };
-
-    localStorage.setItem("userProfile_" + userEmail, JSON.stringify(userProfile));
-    alert("Datos guardados correctamente.");
-}
