@@ -5,11 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Debes estar logueado para acceder al perfil.');
         window.location.href = "login.html";
         return; // Detiene la ejecución si el usuario no está logueado
-    }
+    };
 
     // Función para cargar la información de perfil desde localStorage
     function loadUserProfile(email) {
         const userProfileString = localStorage.getItem(email);
+        document.getElementById("email").value = email;
+
         if (userProfileString) {
             // Parsear los datos del usuario y cargarlos en el formulario
             const userProfile = JSON.parse(userProfileString);
@@ -17,22 +19,28 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("segundoNombre").value = userProfile.segundoNombre || '';
             document.getElementById("apellido").value = userProfile.apellido || '';
             document.getElementById("segundoApellido").value = userProfile.segundoApellido || '';
-            document.getElementById("email").value = userProfile.email || '';
             document.getElementById("telefono").value = userProfile.telefono || '';
-            document.getElementById("displayedProfileImage").src = userProfile.profileImage || "C:\Users\Acer\Desktop\Jovenes a Programar\Fase 2\descarga.png";
+            document.getElementById("displayedProfileImage").src = userProfile.profileImage || "img/img_perfil.png";
         } else {
             // Si no hay datos guardados, cargar imagen por defecto
-            document.getElementById("displayedProfileImage").src = "C:\Users\Acer\Desktop\Jovenes a Programar\Fase 2\descarga.png";
+            document.getElementById("displayedProfileImage").src = "img/img_perfil.png";
         }
-    }
+    };
 
     // Cargar los datos del perfil del usuario
-    loadUserProfile(userEmail);
+    if (userEmail) {
+        loadUserProfile(userEmail);
+    };    
 
     // Guardar la información del perfil del usuario en localStorage
     function saveUserProfile(email, data) {
-        localStorage.setItem(email, JSON.stringify(data));
-    }
+        localStorage.setItem("username", data.email);
+        localStorage.setItem(data.email, JSON.stringify(data));
+        
+        if (email != data.email) {
+            localStorage.removeItem(email);
+        }
+    };
 
     // Evento para manejar cambios en la imagen de perfil
     document.getElementById("profileImage").addEventListener("change", function(event) {

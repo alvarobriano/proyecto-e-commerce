@@ -434,12 +434,34 @@ input[type="submit"] {
 
 
 #displayedProfileImage {
-  width: 120px;
-  height: 120px;
+  width: 13em;
+  height: 13em;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 25px;
 }
 
+/* Estilos para el modo claro */
+table {
+  color: black;
+  background-color: white;
+}
 
+.dark-mode table {
+  color: white;
+  background-color: #797979; /* Cambia esto al color de fondo oscuro que prefieras */
+}
 
+/* Estilo para las celdas pares en modo oscuro */
+.dark-mode table tr:nth-child(even) td {
+  background-color: #a4a4a4; /* Cambia esto al color de fondo oscuro deseado para las celdas pares */
+}
+
+/* Estilo para las celdas impares en modo oscuro */
+.dark-mode table tr:nth-child(odd) td {
+  background-color: #a4a4a4; /* Cambia esto al color de fondo oscuro deseado para las celdas impares */
+}
+
+.dark-mode #userProfileForm { 
+  background-color: #a4a4a4; /* Cambia esto al color de fondo oscuro deseado para las celdas impares */
+}

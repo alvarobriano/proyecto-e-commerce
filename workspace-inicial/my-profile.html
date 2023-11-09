@@ -57,13 +57,15 @@
       <form id="userProfileForm">
         <!-- Dentro del formulario de perfil este lebel sirve para guardar la imagen -->
          <label for="profileImage">Imagen de perfil:</label>
+         <div><img id="displayedProfileImage" alt="Imagen de perfil"></div><br>
          <input type="file" id="profileImage" accept="image/*">
-         <img id="displayedProfileImage" src="" alt="Imagen de perfil" style="max-width: 150px; max-height: 150px;">
+         
+         
          <div class="profile-pic-container">
           
           
-      </div>
-
+          </div>
+          <br>
           <div class="mb-3">
               <label for="nombre" class="form-label">Nombre*</label>
               <input type="text" class="form-control" id="nombre" required>
