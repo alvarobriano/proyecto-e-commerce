@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon init.js",
-    "start": "tu-comando-start",
+    "start": "live-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
 }
