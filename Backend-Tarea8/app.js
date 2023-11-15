@@ -1,9 +1,14 @@
-const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
-const app = express();
 const PORT = 3000;
+
+const cors = require('cors');
+const express = require('express');
+const app = express();
+
+app.use(cors());
+app.options('*', cors());
 
 // Manejador POST para 'cart'
 app.post('/cart', (req, res) => {
@@ -17,21 +22,21 @@ app.get('/cats', (req, res) => {
     servirArchivoJSON(rutaArchivo, res);
 });
 
-// Ruta para 'cat_product/:id'
+// Ruta para 'cats_product/:id'111111
 app.get('/cats_products/:id', (req, res) => {
     const id = req.params.id;
     const rutaArchivo = path.join(__dirname, 'emercado-api-main', 'cats_products', `${id}.json`);
     servirArchivoJSON(rutaArchivo, res);
 });
 
-// Ruta para 'product/:id'
+// Ruta para 'products/:id'
 app.get('/products/:id', (req, res) => {
     const id = req.params.id;
     const rutaArchivo = path.join(__dirname, 'emercado-api-main', 'products', `${id}.json`);
     servirArchivoJSON(rutaArchivo, res);
 });
 
-// Ruta para 'product_comments/:id'
+// Ruta para 'products_comments/:id'
 app.get('/products_comments/:id', (req, res) => {
     const id = req.params.id;
     const rutaArchivo = path.join(__dirname, 'emercado-api-main', 'products_comments', `${id}.json`);
@@ -44,7 +49,7 @@ app.post('/sell', (req, res) => {
     servirArchivoJSON(rutaArchivo, res);
 });
 
-// Ruta para 'user_cart/:id'
+// Ruta para 'users_cart/:id'
 app.get('/user_cart/:id', (req, res) => {
     const id = req.params.id;
     const rutaArchivo = path.join(__dirname, 'emercado-api-main', 'user_cart', `${id}.json`);
