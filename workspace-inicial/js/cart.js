@@ -1,6 +1,6 @@
 // URL para cargar el carrito
 const userId = 25801;
-const cartUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;
+const cartUrl = `http://localhost:3000/user_cart/${userId}`;
 
 
 
