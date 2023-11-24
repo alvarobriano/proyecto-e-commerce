@@ -5,6 +5,11 @@ Instrucciones de Instalación y Ejecución del Proyecto
 Este proyecto es un mono repositorio que incluye tanto un backend en Node.js como un frontend en JavaScript. Sigue las instrucciones a continuación para configurar y ejecutar ambos componentes.
 
 ## Evidencia de funcionamiento de la api
+### Usuarios admitidos por la api en el login (están en la BD):
+Con los siguientes usuarios se puede comprobar el funcionamiento de la api para el login, sino no te deja.
+-  { username: 'user1@mail.com', password: 'pass1' }
+-  { username: 'user2@mail.com', password: 'pass2' }
+
 #### Métodos GET que sustituyen a los que utilizábamos del repo de JAP:
 
 ![GET CATS](img/get-cats.png)

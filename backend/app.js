@@ -108,7 +108,6 @@ app.post('/login', (req, res) => {
 
     // Generar el token JWT
     const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
-    console.log(token)
     // Enviar el token al cliente
     res.json({ token });
 });
