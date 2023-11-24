@@ -7,17 +7,45 @@ document.addEventListener("DOMContentLoaded", function() {
       event.preventDefault(); // Evitar que el formulario se envíe de la forma tradicional
 
       // Obtener el valor del campo de correo electrónico
-      var userEmail = document.getElementById('username').value;
+      let userEmail = document.getElementById('username').value;
+      let userPassword = document.getElementById('password').value;   
 
       // Verificar si el correo electrónico ha sido ingresado
       if (userEmail == "") {
           alert("El usuario no está logueado, por favor rellene los campos");
       } else {
-          // Guardar el correo electrónico en localStorage
-          localStorage.setItem("username", userEmail);
+          // Datos del usuario (username y password)
+            const userData = {
+                username: userEmail,
+                password: userPassword // Asegúrate de tener la contraseña del usuario aquí
+            };
 
-          // Redireccionar al usuario al perfil o a la página que corresponda
-          window.location.href = "index.html";
-      }
+            // Hacer la solicitud POST al servidor
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Credenciales incorrectas');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Guardar el token en localStorage o usarlo según tu lógica de cliente
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', userEmail);
+
+                // Redireccionar al usuario al perfil o página correspondiente
+                window.location.href = 'index.html';
+            })
+            .catch(error => {
+                // Manejar errores de autenticación
+                alert(error.message);
+            });
+        }
   });
 });

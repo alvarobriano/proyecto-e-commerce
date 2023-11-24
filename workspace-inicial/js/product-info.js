@@ -26,7 +26,7 @@ if (selectedProductId) {
   // URL de la API o de donde obtendrás la información del producto (reemplaza con tu URL)
   const PRODUCT_API_URL = `http://localhost:3000/products/${selectedProductId}`;
   const PRODUCT_COMMENTS_URL = `http://localhost:3000/products_comments/${selectedProductId}`;
-  const PRODUCTS = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
+  const PRODUCTS = `http://localhost:3000/cats_products/${localStorage.getItem("catID")}`;
 
   // Entrega 3, parte 2 y parte 3: Función para cargar y mostrar la información del producto y comentarios
   async function loadProductInfo() {

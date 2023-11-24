@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+//const verificaToken = require('./middleware'); // Importar el middleware
 
 const app = express();
 const PORT = 3000;
@@ -12,15 +13,41 @@ const SECRET_KEY = 'tuClaveSecreta';
 
 // Usuarios de ejemplo (en una implementación real, deberías consultar una base de datos)
 const users = [
-    { username: 'user1', password: 'pass1' },
-    { username: 'user2', password: 'pass2' }
+    { username: 'user1@mail.com', password: 'pass1' },
+    { username: 'user2@mail.com', password: 'pass2' }
 ];
+
+//middleware, lo defino en app.js porque si lo hago en un archivo aparte no funciona
+function verificaToken(req, res, next) {
+    // Obtener el token del encabezado de autorización
+    const authorizationHeader = req.headers.authorization;
+  
+    if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ message: 'Token no encontrado o en formato incorrecto.' });
+    }
+  
+    // Separar la cadena para obtener solo el token
+    const token = authorizationHeader.split(' ')[1];
+  
+    // Verificar el token
+    jwt.verify(token, SECRET_KEY, (err, decoded) => {
+      if (err) {
+        return res.status(401).json({ message: 'Token inválido o expirado.'});
+      }
+      // Decodificado correctamente, se puede adjuntar el usuario al objeto de solicitud para su uso posterior
+      req.user = decoded;
+      next(); // Continuar con la solicitud
+    });
+  }
 
 app.use(cors());
 app.options('*', cors());
 
 // Colocar express.json() aquí para analizar el cuerpo de las solicitudes POST
 app.use(express.json());
+
+// Aplicar el middleware de autorización a la ruta '/cart'
+app.use('/cart', verificaToken);
 
 // Manejador POST para 'cart'
 app.post('/cart', (req, res) => {
@@ -81,7 +108,7 @@ app.post('/login', (req, res) => {
 
     // Generar el token JWT
     const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
-
+    console.log(token)
     // Enviar el token al cliente
     res.json({ token });
 });
@@ -99,28 +126,4 @@ function servirArchivoJSON(rutaArchivo, res) {
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
-//Esta es la parte 3 de la entrega 8 
-function verificarToken(req, res, next) {
-    // Obtener el token del encabezado de la solicitud
-    const token = req.headers['authorization'];
-
-    if (!token) {
-        return res.status(403).send('Se requiere un token para autenticación');
-    }
-
-    try {
-        // Verificar el token
-        const verificado = jwt.verify(token, SECRET_KEY);
-        // Añadir los datos del usuario decodificados a la solicitud
-        req.usuario = verificado;
-        next(); // Pasar al siguiente middleware o manejador de ruta
-    } catch (error) {
-        res.status(401).send('Token inválido o expirado');
-    }
-}
-// Aplicar el middleware verificarToken solo a esta ruta
-app.post('/cart', verificarToken, (req, res) => {
-    const rutaArchivo = path.join(__dirname, 'emercado-api-main', 'cart', 'buy.json');
-    servirArchivoJSON(rutaArchivo, res);
 });
