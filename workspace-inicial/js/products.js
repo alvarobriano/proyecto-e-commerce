@@ -7,7 +7,7 @@ let minCount = undefined;
 let maxCount = undefined;
 
 //parte 2
-const DATA_AUTO_URL = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
+const DATA_AUTO_URL = `http://localhost:3000/cats_products/${localStorage.getItem("catID")}`;
 
 // Entrega 3, parte 1: Agrega esta función para manejar el clic en un producto
 // Esta función es llamada cuando se apreta el botón "ver detalles" de la línea 41

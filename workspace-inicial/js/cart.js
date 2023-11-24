@@ -1,6 +1,6 @@
 // URL para cargar el carrito
 const userId = 25801;
-const cartUrl = `https://japceibal.github.io/emercado-api/user_cart/${userId}.json`;
+const cartUrl = `http://localhost:3000/user_cart/${userId}`;
 
 
 
@@ -254,8 +254,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   btnFinalizarCompra.addEventListener("click", () => {
     if (!btnFinalizarCompra.disabled){
-      const myModal = new bootstrap.Modal(document.getElementById("myModal"));
-      myModal.show();
+        // Obtener el token del localStorage
+        const token = localStorage.getItem('token');
+        // Realizar la solicitud para verificar el middleware
+        fetch('http://localhost:3000/cart', {
+          method: 'POST',
+          headers: {
+              'Authorization': `Bearer ${token}` // Agrega tu token aquí
+          }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Si el token es válido y el middleware lo permite, muestra el modal
+                const myModal = new bootstrap.Modal(document.getElementById("myModal"));
+                myModal.show();
+            } else {
+                alert("No estás logueado, o tu sesión expiró")
+                // Si hay un problema con el token o el middleware, maneja el error
+                throw new Error('Error al verificar el token.');
+            }
+        })
+        .catch(error => {
+            // Manejar cualquier error que ocurra durante la verificación del token
+            console.error(error);
+            // Podrías mostrar un mensaje de error al usuario o tomar otra acción apropiada
+        });
     } 
 
     pagoelegido.forEach(function (radioButton) {
